@@ -1,0 +1,24 @@
+
+server {
+
+
+    server_name movielab.online   www.movielab.online;
+
+
+    access_log /var/log/nginx/movielab.online.access.log rt_cache;
+    error_log /var/log/nginx/movielab.online.error.log;
+
+
+    root /var/www/movielab.online/htdocs;
+    
+    
+
+    index index.php index.html index.htm;
+
+
+    include common/php7.conf;  
+    
+    
+    include common/locations-php7.conf;
+    include /var/www/movielab.online/conf/nginx/*.conf;
+}

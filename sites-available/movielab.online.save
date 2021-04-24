@@ -1,0 +1,58 @@
+server {
+    server_name movielab.online   www.movielab.online;
+
+    access_log /var/log/nginx/movielab.online.access.log rt_cache;
+    error_log /var/log/nginx/movielab.online.error.log;
+
+    root /var/www/movielab.online/htdocs;
+
+    index index.php index.html index.htm;
+
+    charset utf-8;
+
+	location / {
+		try_files $uri $uri/ /index.php?$query_string;
+	}
+
+	location = /favicon.ico { access_log off; log_not_found off; }
+	location = /robots.txt  { access_log off; log_not_found off; }
+
+	location ~ \.php$ {
+
+fastcgi_split_path_info ^(.+\.php)(/.+)$;
+  try_files $uri =404;
+  include fastcgi_params;
+  fastcgi_pass php74;
+fastcgi_index index.php;
+}
+
+
+
+#    location ~ \.php$ {
+#        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+#        fastcgi_pass unix:/var/run/php5-fpm.sock;
+#        fastcgi_index index.php;
+#        include fastcgi_params;
+#    }
+
+
+
+
+
+
+
+
+
+
+    error_page 404 /index.php;
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+
+
+#    include common/php74.conf;  
+   # include common/locations-php74.conf;
+    include /var/www/movielab.online/conf/nginx/*.conf;
+}

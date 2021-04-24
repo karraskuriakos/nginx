@@ -1,0 +1,24 @@
+
+server {
+
+
+    server_name img.oipeirates.tv   www.img.oipeirates.tv;
+
+
+    access_log /var/log/nginx/img.oipeirates.tv.access.log rt_cache;
+    error_log /var/log/nginx/img.oipeirates.tv.error.log;
+
+
+    root /var/www/oipeirates.tv/htdocs;
+    
+    
+
+    index index.php index.html index.htm;
+
+
+    include common/php7.conf;  
+    
+    include common/wpcommon-php7.conf;
+    include common/locations-php7.conf;
+    include /var/www/img.oipeirates.tv/conf/nginx/*.conf;
+}
